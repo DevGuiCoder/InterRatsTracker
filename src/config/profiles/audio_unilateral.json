@@ -1,0 +1,11 @@
+{
+  "id": "audio_unilateral",
+  "name": "Audio unilateral",
+  "description": "Prioriza UDP, VPN, multiplas interfaces, IP publico, CGNAT e rota.",
+  "recommended_interval_seconds": 3.0,
+  "enabled_monitors": ["gateway", "internet", "dns", "sip", "udp_flow", "public_ip", "network_environment", "route", "audio"],
+  "priority_metrics": ["udp_flow", "vpn", "public_ip", "route", "cgnat"],
+  "mark_tests": ["technical_snapshot", "udp_flow", "route_trace", "public_ip"],
+  "highlight_report_sections": ["udp_flow", "public_ip", "vpn_proxy", "route"],
+  "threshold_overrides": {}
+}

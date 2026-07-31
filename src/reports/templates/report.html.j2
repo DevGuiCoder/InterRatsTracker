@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Relatorio Vigos - {{ session.request.client_name }}</title>
+  <style>
+    :root {
+      --customer-marker-color: #ff7a00;
+      --customer-marker-edge-color: #b45309;
+      --customer-marker-fill-color: #fff3e6;
+      --customer-marker-text-color: #7c2d12;
+    }
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 32px; color: #172033; }
+    h1, h2 { color: #0B3157; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0 24px; }
+    th, td { border: 1px solid #D0D7DE; padding: 8px; font-size: 13px; text-align: left; }
+    th { background: #EAF2F8; }
+    .critical { color: #B42318; font-weight: 700; }
+    .warning { color: #9A6700; font-weight: 700; }
+    .mark { border-left: 4px solid var(--customer-marker-color); padding: 8px 12px; background: var(--customer-marker-fill-color); margin: 10px 0; }
+    .customer-marker-summary { border: 1px solid var(--customer-marker-edge-color); background: var(--customer-marker-fill-color); padding: 12px; margin: 12px 0 20px; }
+    .customer-occurrence-card { border: 2px solid var(--customer-marker-color); border-left-width: 8px; background: var(--customer-marker-fill-color); padding: 14px; margin: 14px 0; page-break-inside: avoid; }
+    .customer-occurrence-card h3 { margin: 6px 0 8px; color: var(--customer-marker-text-color); }
+    .customer-marker-badge { display: inline-block; border: 1px solid var(--customer-marker-edge-color); color: var(--customer-marker-text-color); background: #fff; padding: 3px 7px; font-size: 12px; font-weight: 700; }
+    .customer-marker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px 12px; }
+    .customer-marker-row { background: var(--customer-marker-fill-color); color: var(--customer-marker-text-color); font-weight: 700; }
+    .incident-replay { border-top: 2px solid var(--customer-marker-color); margin-top: 18px; padding-top: 10px; page-break-inside: avoid; }
+    @media print { .customer-occurrence-card, .incident-replay { break-inside: avoid; } a { color: inherit; text-decoration: none; } }
+    img { max-width: 100%; border: 1px solid #D0D7DE; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Vigos Network Stability Monitor</h1>
+  <p><strong>Status:</strong> {{ "monitoramento interrompido inesperadamente" if interrupted else session.status }}</p>
+  <h2>Identificacao</h2>
+  <p><strong>Cliente:</strong> {{ session.request.client_name }}</p>
+  <p><strong>Unidade:</strong> {{ session.request.unit or "nao informada" }}</p>
+  <p><strong>Perfil:</strong> {{ session.request.profile_id }}</p>
+  <p><strong>Problema relatado:</strong> {{ session.request.problem_description }}</p>
+  <p><strong>Inicio:</strong> {{ format_datetime_local(session.started_at) }}<br>
+     <strong>Fim:</strong> {{ format_datetime_local(session.finished_at) }}</p>
+  <p><strong>Medicoes usadas no diagnostico:</strong> {{ official_measurement_count }} de {{ raw_measurement_count }}<br>
+     <strong>Medicoes de aquecimento:</strong> {{ warmup_measurement_count }}</p>
+  <h2>Resumo executivo</h2>
+  {{ executive_html | safe }}
+  <h2>Maquina e rede</h2>
+  {{ system_info_html | safe }}
+  <h2>Metricas oficiais por destino</h2>
+  <table><thead><tr><th>Destino</th><th>Categoria</th><th>Teste</th><th>Estado final</th><th>Testes</th><th>Sucessos</th><th>Falhas</th><th>Disponibilidade</th><th>Taxa de falhas</th><th>Atual</th><th>Media</th><th>P95</th><th>Pico</th><th>Variacao</th><th>Maior sequencia</th></tr></thead>
+  <tbody>{{ metric_rows | safe }}</tbody></table>
+  <h2>Marcacoes do cliente</h2>
+  {{ marks_html | safe }}
+  <h2>Baseline inicial</h2>
+  {{ baseline_html | safe }}
+  <h2>Snapshots tecnicos das marcacoes</h2>
+  {{ technical_snapshots_html | safe }}
+  <h2>Diagnosticos adicionais</h2>
+  {{ diagnostics_html | safe }}
+  <h2>Diagnostico de audio</h2>
+  {{ audio_html | safe }}
+  <h2>Eventos criticos e avisos</h2>
+  {{ events_html | safe }}
+  <h2>Interrupcoes detectadas</h2>
+  {{ interruptions_html | safe }}
+  <h2>Correlacao</h2>
+  {{ correlation_html | safe }}
+  <h2>Graficos</h2>
+  <img src="grafico_latencia.png" alt="Grafico de latencia">
+  <img src="grafico_perda.png" alt="Grafico de perda">
+  <img src="grafico_jitter.png" alt="Grafico de jitter">
+  <img src="grafico_disponibilidade.png" alt="Grafico de disponibilidade">
+  <img src="linha_tempo_eventos.png" alt="Linha do tempo de eventos">
+  <img src="grafico_trafego.png" alt="Grafico de trafego">
+  <img src="grafico_sistema.png" alt="Grafico de sistema">
+  <img src="grafico_wifi.png" alt="Grafico de Wi-Fi">
+  <img src="grafico_qualidade_voz.png" alt="Grafico de qualidade de voz">
+  {{ marker_images | safe }}
+</body>
+</html>

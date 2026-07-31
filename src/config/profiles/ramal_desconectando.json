@@ -1,0 +1,11 @@
+{
+  "id": "ramal_desconectando",
+  "name": "Ramal desconectando",
+  "description": "Prioriza DNS, SIP OPTIONS, transporte, IP publico, VPN e horario.",
+  "recommended_interval_seconds": 3.0,
+  "enabled_monitors": ["internet", "dns", "sip", "sip_options", "public_ip", "network_environment", "time_sync", "audio"],
+  "priority_metrics": ["dns", "sip_options", "resolved_ip_changes", "public_ip", "vpn", "time_sync"],
+  "mark_tests": ["technical_snapshot", "sip_options", "public_ip", "time_sync"],
+  "highlight_report_sections": ["sip_options", "dns", "public_ip", "vpn_proxy", "time_sync"],
+  "threshold_overrides": {}
+}

@@ -1,0 +1,16 @@
+{
+  "id": "audio_cortando",
+  "name": "Audio cortando ou robotizado",
+  "description": "Prioriza jitter, perda, picos de latencia, Wi-Fi, upload e CPU.",
+  "recommended_interval_seconds": 2.0,
+  "enabled_monitors": ["gateway", "internet", "dns", "sip", "wifi", "traffic", "system", "sip_options", "audio"],
+  "priority_metrics": ["jitter", "packet_loss", "latency_spikes", "wifi_signal", "upload", "cpu"],
+  "mark_tests": ["technical_snapshot", "sip_options", "traffic_snapshot", "system_snapshot"],
+  "highlight_report_sections": ["voice_quality", "wifi", "traffic", "system", "sip_options"],
+  "threshold_overrides": {
+    "jitter_warning_ms": 25,
+    "jitter_critical_ms": 50,
+    "packet_loss_warning_percent": 1.0,
+    "packet_loss_critical_percent": 3.0
+  }
+}

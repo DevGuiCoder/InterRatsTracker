@@ -1,0 +1,11 @@
+{
+  "id": "diagnostico_completo",
+  "name": "Diagnostico completo",
+  "description": "Habilita todos os coletores leves e testes sob demanda disponiveis.",
+  "recommended_interval_seconds": 2.0,
+  "enabled_monitors": ["gateway", "internet", "dns", "sip", "wifi", "traffic", "system", "sip_options", "sip_transport", "udp_flow", "time_sync", "route", "public_ip", "network_environment", "audio"],
+  "priority_metrics": ["availability", "latency", "jitter", "packet_loss", "traffic", "system", "sip_options", "wifi", "route"],
+  "mark_tests": ["technical_snapshot", "sip_options", "sip_transport", "udp_flow", "route_trace", "public_ip", "time_sync"],
+  "highlight_report_sections": ["voice_quality", "traffic", "system", "sip_options", "sip_transport", "udp_flow", "time_sync", "wifi", "route", "public_ip", "vpn_proxy"],
+  "threshold_overrides": {}
+}

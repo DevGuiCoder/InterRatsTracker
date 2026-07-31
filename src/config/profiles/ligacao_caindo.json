@@ -1,0 +1,11 @@
+{
+  "id": "ligacao_caindo",
+  "name": "Ligacao caindo",
+  "description": "Prioriza falhas consecutivas, mudanca de interface/IP, SIP OPTIONS e rota.",
+  "recommended_interval_seconds": 2.0,
+  "enabled_monitors": ["gateway", "internet", "dns", "sip", "traffic", "system", "sip_options", "route", "audio"],
+  "priority_metrics": ["consecutive_failures", "gateway_availability", "ip_changes", "route_changes", "sip_options"],
+  "mark_tests": ["technical_snapshot", "sip_options", "route_trace"],
+  "highlight_report_sections": ["interruptions", "sip_options", "route", "network_changes"],
+  "threshold_overrides": {}
+}

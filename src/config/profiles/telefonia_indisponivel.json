@@ -1,0 +1,11 @@
+{
+  "id": "telefonia_indisponivel",
+  "name": "Servico de telefonia indisponivel",
+  "description": "Prioriza disponibilidade do SIP, transportes e DNS.",
+  "recommended_interval_seconds": 3.0,
+  "enabled_monitors": ["gateway", "internet", "dns", "sip", "sip_options", "sip_transport", "route", "audio"],
+  "priority_metrics": ["sip_availability", "sip_options", "transport_connectivity", "dns"],
+  "mark_tests": ["technical_snapshot", "sip_options", "sip_transport", "route_trace"],
+  "highlight_report_sections": ["sip_options", "sip_transport", "route", "dns"],
+  "threshold_overrides": {}
+}

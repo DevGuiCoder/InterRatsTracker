@@ -1,0 +1,11 @@
+{
+  "id": "internet_instavel",
+  "name": "Internet instavel",
+  "description": "Prioriza gateway, destinos externos, DNS, trafego e IP publico.",
+  "recommended_interval_seconds": 2.0,
+  "enabled_monitors": ["gateway", "internet", "dns", "traffic", "public_ip", "route", "system"],
+  "priority_metrics": ["packet_loss", "latency", "availability", "traffic", "public_ip"],
+  "mark_tests": ["technical_snapshot", "traffic_snapshot", "route_trace", "public_ip"],
+  "highlight_report_sections": ["traffic", "public_ip", "route", "network_changes"],
+  "threshold_overrides": {}
+}
